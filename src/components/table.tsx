@@ -3,37 +3,33 @@ import React from "react";
 type TableProps<T> = {
   columns: string[];
   data: T[];
+  renderCell?: (column: string, row: T) => React.ReactNode;
 };
 
-const Table = <T extends Record<string, any>>({
-  columns,
-  data,
-}: TableProps<T>) => {
+const Table = <T,>({ columns, data, renderCell }: TableProps<T>) => {
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full bg-white border">
-        <thead>
-          <tr>
-            {columns.map((col) => (
-              <th key={col} className="py-2 px-4 bg-gray-200 border-b">
-                {col}
-              </th>
+    <table className="min-w-full bg-white">
+      <thead>
+        <tr>
+          {columns.map((column) => (
+            <th key={column} className="py-2 px-4 border-b">
+              {column}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((row, rowIndex) => (
+          <tr key={rowIndex} className="hover:bg-gray-100">
+            {columns.map((column) => (
+              <td key={column} className="py-2 px-4 border-b">
+                {renderCell ? renderCell(column, row) : (row as any)[column]}
+              </td>
             ))}
           </tr>
-        </thead>
-        <tbody>
-          {data.map((row, rowIndex) => (
-            <tr key={rowIndex} className="border-b">
-              {columns.map((col) => (
-                <td key={col} className="py-2 px-4">
-                  {row[col]}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        ))}
+      </tbody>
+    </table>
   );
 };
 

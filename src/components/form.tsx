@@ -1,36 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 
-type FormField = {
+type Field = {
   name: string;
   label: string;
   type: string;
 };
 
 type FormProps = {
-  fields: FormField[];
+  fields: Field[];
   onSubmit: (data: Record<string, any>) => void;
 };
 
 const Form: React.FC<FormProps> = ({ fields, onSubmit }) => {
+  const [formData, setFormData] = useState<Record<string, any>>({});
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const data = Object.fromEntries(formData.entries()) as Record<string, any>;
-    onSubmit(data);
+    onSubmit(formData);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit}>
       {fields.map((field) => (
-        <div key={field.name} className="flex flex-col">
-          <label htmlFor={field.name} className="text-sm">
-            {field.label}
-          </label>
+        <div key={field.name} className="mb-4">
+          <label className="block text-gray-700">{field.label}</label>
           <input
             type={field.type}
             name={field.name}
-            id={field.name}
-            className="p-2 border rounded"
+            value={formData[field.name] || ""}
+            onChange={handleChange}
+            className="mt-1 block w-full border border-gray-300 rounded p-2"
           />
         </div>
       ))}
