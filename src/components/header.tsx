@@ -4,6 +4,7 @@ const Header = () => {
   return (
     <nav className="bg-blue-600 p-4">
       <div className="container mx-auto flex justify-between items-center">
+        <h1 className="text-white text-xl">DBMS</h1>
         <Link href="/">
           <h1 className="text-white text-xl">School Management System</h1>
         </Link>
