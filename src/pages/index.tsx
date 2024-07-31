@@ -8,14 +8,12 @@ const poppins = Poppins({
 
 export default function Home() {
   return (
-    <Layout>
-      <main
-        className={`flex relative w-full overflow-clip min-h-screen pt-[42px] flex-col  items-center ${poppins.className}`}
-      >
-        <h1 className="text-2xl font-bold">
-          Welcome to the School Management System
-        </h1>
-      </main>
-    </Layout>
+    <main
+      className={`flex relative w-full overflow-clip min-h-screen pt-[42px] flex-col  items-center ${poppins.className}`}
+    >
+      <h1 className="text-2xl font-bold">
+        Welcome to the School Management System
+      </h1>
+    </main>
   );
 }
