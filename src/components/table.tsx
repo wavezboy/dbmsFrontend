@@ -1,5 +1,3 @@
-import React from "react";
-
 type TableProps<T> = {
   columns: string[];
   data: T[];
@@ -12,7 +10,7 @@ const Table = <T,>({ columns, data, renderCell }: TableProps<T>) => {
       <thead>
         <tr>
           {columns.map((column) => (
-            <th key={column} className="py-2 px-4 border-b">
+            <th key={column} className="py-2 px-4 border-b text-left">
               {column}
             </th>
           ))}
@@ -22,7 +20,7 @@ const Table = <T,>({ columns, data, renderCell }: TableProps<T>) => {
         {data.map((row, rowIndex) => (
           <tr key={rowIndex} className="hover:bg-gray-100">
             {columns.map((column) => (
-              <td key={column} className="py-2 px-4 border-b">
+              <td key={column} className="py-2 px-4 border-b min-w-[150px]">
                 {renderCell ? renderCell(column, row) : (row as any)[column]}
               </td>
             ))}

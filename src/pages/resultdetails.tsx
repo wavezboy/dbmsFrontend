@@ -46,8 +46,10 @@ const ResultsDetails = () => {
   return (
     <div>
       <div className="container mx-auto p-4">
-        <h1 className="text-2xl font-bold">Result Details</h1>
-        <div className="bg-white p-6 rounded shadow-md mb-4">
+        <h1 className="text-2xl font-bold text-center uppercase mb-5">
+          Result Details
+        </h1>
+        <div className="bg-blue-600 text-white uppercase p-3 rounded shadow-md mb-4 space-y-2">
           <p>
             <strong>Student Name:</strong> {resultDetail.studentName}
           </p>
@@ -78,7 +80,7 @@ const ResultsDetails = () => {
             </thead>
             <tbody>
               {resultDetail.subjects.map((subject, index) => (
-                <tr key={index} className="hover:bg-gray-100">
+                <tr key={index} className="hover:bg-gray-100 text-center">
                   <td className="py-2 px-4 border-b">{subject.subject}</td>
                   <td className="py-2 px-4 border-b">{subject.score}</td>
                   <td className="py-2 px-4 border-b">{subject.testScore}</td>
